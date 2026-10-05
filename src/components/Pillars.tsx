@@ -19,7 +19,7 @@ export function Pillars() {
             Engineering Pillars
           </h2>
           <p className="max-w-2xl font-sans text-base font-light leading-relaxed text-zinc-800 sm:text-lg">
-            Two distinct specializations framing my technical approach — from sub-second user interfaces to cloud infrastructure.
+            From sub-second user interfaces to cloud infrastructure: two disciplines, one end-to-end perspective.
           </p>
         </div>
 

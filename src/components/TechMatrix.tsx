@@ -15,13 +15,14 @@ export function TechMatrix() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12">
         {/* Section Header */}
         <div className="flex flex-col items-center gap-2 text-center">
-<span className="inline-flex items-center border border-zinc-200/80 bg-white/70 px-3 py-1 backdrop-blur-md font-sans text-xs font-normal uppercase tracking-[0.25em] text-zinc-900 shadow-sm">            System Stack
+        <span className="inline-flex items-center border border-zinc-200/80 bg-white/70 px-3 py-1 backdrop-blur-md font-sans text-xs font-normal uppercase tracking-[0.25em] text-zinc-900 shadow-sm">
+          TECH STACK
           </span>
           <h2 className="font-sans text-3xl font-extralight tracking-tight text-zinc-950 sm:text-4xl md:text-5xl">
-            Capabilities Matrix
+            Technical Skills
           </h2>
           <p className="max-w-2xl font-sans text-base font-light leading-relaxed text-zinc-800 sm:text-lg">
-            Core technologies and infrastructure layers powering scalable, high-availability web applications.
+            The languages, cloud services, and tools I use every day to build and run web applications.
           </p>
         </div>
 

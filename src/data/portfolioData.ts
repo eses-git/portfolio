@@ -24,6 +24,7 @@ export interface PersonalHeader {
   readonly title: string
   readonly headline: string
   readonly summary: string
+  readonly footerdesc:string
   /** Short labels rendered as dual-role badges. */
   readonly roleBadges: readonly string[]
 }
@@ -38,6 +39,7 @@ export interface RelocationBadge {
   /** Language names suitable for compact chips. */
   readonly languages: readonly string[]
   readonly availability: string
+  readonly nationality: string
 }
 
 /** One of the two core professional pillars. */
@@ -105,9 +107,10 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   header: {
     name: 'Estera Bulkiewicz',
-    profileImage: '/images/estera-profile.jpg',
+    profileImage: '/images/foto3.jpg',
     title: 'Full-Stack Engineer & Solution Architect',
-    headline: 'Crafting modern digital solutions with precision.',
+    footerdesc:'Looking for Full-Stack Engineer and Solution Architect roles in Spain, remote or on-site. Available now.',
+    headline: 'Full-stack development for the modern world.',
     summary:
       'I design and ship production-grade frontend systems and the cloud architecture behind them — pairing deep React/TypeScript craft with AWS, CI/CD, and security-first delivery.',
     roleBadges: ['Frontend Engineering', 'AWS & Solution Architecture'],
@@ -116,7 +119,8 @@ export const portfolioData: PortfolioData = {
   github: 'https://github.com/eses-git',
 
   relocation: {
-    currentLocations: ['Ecuador', 'Poland'],
+    currentLocations: ['Ecuador', 'Poland','Spain'],
+    nationality:'Polish',
     destination: 'Spain',
     timeline: 'Q4 2026',
     languages: ['English', 'Spanish', 'Polish'],
@@ -129,7 +133,7 @@ export const portfolioData: PortfolioData = {
       id: 'frontend-engineering',
       title: 'Frontend Engineering',
       description:
-        'High-performance, accessible interfaces built for scale — from pixel-accurate Figma hand-off to sub-second, animation-heavy experiences.',
+        'I build fast, accessible interfaces, from turning Figma designs into pixel-accurate pages to animation-heavy experiences that still load in under a second. I rely on real profiling data, not guesses.',
       skills: [
         'React & Next.js Architecture',
         'TypeScript & Modern JS',
@@ -143,14 +147,14 @@ export const portfolioData: PortfolioData = {
       id: 'solution-architecture',
       title: 'Solution Architecture',
       description:
-        'End-to-end system design across cloud, APIs, and payments — infrastructure as code, secure delivery pipelines, and integrations that hold up under load.',
+        'I design the systems behind the interface: cloud setup, APIs, and payment integrations. I like to start from the requirements and finish with a deployment pipeline I can trust under real traffic.',
       skills: [
         'Requirements Analysis',
         'AWS & Cloud Infrastructure',
         'RESTful API Architecture',
         'PHP Yii2 & Python Backends',
         'Vercel CI/CD & Cloudflare',
-        'Stakeholder Alignment & E2E',
+        'Payment Integrations',
         
       ],
     },
@@ -159,9 +163,9 @@ export const portfolioData: PortfolioData = {
  techMatrix: [
     {
       id: 'fullstack-frontend',
-      title: 'Full-Stack & Frontend Core',
+      title: 'Frontend Core',
       description:
-        'Typed interfaces and application layers built for speed, accessibility, and maintainable component architecture.',
+        'I build with React, Next.js, and TypeScript, with a focus on fast pages, accessibility, and components that are easy to maintain.',
       icon: 'code',
       items: [
         'React & Next.js',
@@ -174,32 +178,32 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: 'aws-backend',
-      title: 'AWS & Backend Architecture',
+      title: 'Cloud & Backend',
       description:
-        'Cloud infrastructure, serverless microservices, and database query modeling engineered for performance under load.',
+        'I set up AWS services and write backends in PHP, Python and React, along with the databases and payment integrations they rely on.',
       icon: 'cloud',
       items: [
         'AWS (S3, API Gateway)',
         'CloudFront & Route53',
-        'PHP Yii2 Framework',
+        'PHP',
         'Python (FastAPI)',
-        'MySQL & Memgraph DB',
-        'Stripe & PayPal Gateways',
+        'MySQL, MariaDB, noSQL',
+        'Stripe & PayPal integrations',
       ],
     },
     {
       id: 'devops-security',
       title: 'DevOps & Cloud Security',
       description:
-        'Automated delivery pipelines, edge security, domain routing, and production Linux environment management.',
+        'I manage deployments, DNS, and Linux servers, and protect sites with SSL and DDoS filtering so releases stay safe and predictable.',
       icon: 'shield',
       items: [
         'GitHub Actions & Vercel CI/CD',
         'Cloudflare DNS & DDoS Protection',
         'Linux (Ubuntu / Apache / Nginx)',
         'Bash Scripting & Automation',
-        'SSL / TLS Termination',
-        'Git Workflow & Release Mgmt',
+        'SSL / TLS Setup',
+        'Git Workflow & Release',
       ],
     },
   ],
@@ -283,19 +287,20 @@ export const portfolioData: PortfolioData = {
   experience: [
     {
       company: 'Independent Consulting',
-      role: 'Frontend / Full-Stack Software Engineer',
+      role: 'Full-Stack Software Engineer',
       period: 'Oct 2019 — Present',
       location: 'Ecuador & International Remote',
       summary:
-        'Architecting and delivering production-ready web applications, responsive user interfaces, and secure cloud setups for international clients — turning Figma wireframes into performance-tuned frontend systems.',
+        'I work independently with international clients, covering everything from the Figma hand-off to the frontend, backend, payments, and hosting.',
       highlights: [
-        'Engineered custom 60 FPS HTML5 Canvas rendering engines in React and TypeScript, delivering dense visual background dynamics while avoiding DOM reflow overhead',
-        'Architected RESTful services and backend integrations in PHP (Yii2 framework) and Python, connecting relational MySQL databases with modern frontend layers',
-        'Integrated Stripe and PayPal payment gateway APIs with backend service layers and webhook listeners',
-        'Configured automated CI/CD deployment pipelines on Vercel and secured client infrastructure with Cloudflare DDoS mitigation, SSL encryption, and DNS routing',
-        'Utilized advanced AI tooling (Claude, Gemini, ChatGPT, Cline Agent) to accelerate system design, unit test generation, and code refactoring',
-        'Designed and delivered end-to-end web projects on WordPress and Wix platforms',
+        "Built custom HTML5 Canvas animation engines in React and TypeScript that run at 60 FPS without touching the DOM, so heavy visual backgrounds don't slow pages down.",
+        'Developed REST APIs and backend services in PHP (Yii2) and Python, connected to MySQL and used by modern frontends.',
+        'Integrated Stripe and PayPal payment gateway APIs with backend service layers.',
+        'Set up CI/CD pipelines on Vercel, Cloudflare workers and secured client sites with Cloudflare (DDoS protection, SSL, DNS).',
+        'Utilized advanced AI tooling (Claude, Gemini, ChatGPT, Cline Agent) to accelerate system design, unit test generation, and code refactoring.',
+        'Delivered WordPress and Wix sites, fixed performance problems on existing ones, and migrated domains and servers.',
         'Diagnosed and resolved performance and technical issues across existing websites, executing seamless domain and server migrations',
+        'Lead projects from the first call to launch: gather requirements, propose solutions, and keep clients updated in English and Spanish.'
       ],
     },
     {

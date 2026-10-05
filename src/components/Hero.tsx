@@ -31,7 +31,7 @@ function Hero() {
   const { header, relocation, github } = portfolioData
   const [imageStatus, setImageStatus] = useState<ImageStatus>('loading')
 
-  const badge = `PORTFOLIO / 2026 · ESTERA BULKIEWICZ · FULL-STACK ARCHITECTURE`
+  const badge = `PORTFOLIO / 2026  · FULL-STACK ARCHITECTURE`
 
   const metrics: readonly {
     label: string
@@ -39,23 +39,23 @@ function Hero() {
     valueClassName: string
   }[] = [
     {
-      label: 'Name',
-      value: header.name.toUpperCase(),
+      label: 'Availability',
+      value: 'Available now',
       valueClassName: 'font-sans text-xl font-normal text-zinc-950 md:text-2xl',
     },
     {
-      label: 'Location',
-      value: relocation.currentLocations.join(' / '),
+      label: 'Nationality',
+      value: relocation.nationality,
       valueClassName: 'font-sans text-sm font-light text-zinc-600 md:text-base',
     },
     {
       label: 'Languages',
-      value: relocation.languages.join(' · '),
+      value: "Polish (native), Spanish (Fluent), English (Fluent)",
       valueClassName: 'font-sans text-sm font-light text-zinc-900 md:text-base',
     },
     {
-      label: 'TECH STACK',
-      value: 'React · Next.js · TypeScript · FastAPI · PHP',
+      label: 'Work style',
+      value: 'Remote or hybrid',
       valueClassName: 'font-sans text-sm font-light text-zinc-700 md:text-base',
     },
   ]

@@ -72,7 +72,7 @@ function Footer() {
               {header.name}
             </h2>
             <p className="max-w-2xl font-sans text-base font-light leading-relaxed text-zinc-600">
-              {header.title} — {relocation.availability}
+              {header.title} — {header.footerdesc}
             </p>
           </div>
 
@@ -175,10 +175,10 @@ function Footer() {
           <div className="grid gap-px border border-zinc-200 bg-zinc-200/80 backdrop-blur-sm md:grid-cols-2">
             <div className="flex flex-col gap-1 bg-white/90 p-4 backdrop-blur-sm">
               <span className="font-sans text-[10px] font-light uppercase tracking-[0.25em] text-zinc-500">
-                Based In
+                Nationality
               </span>
               <span className="font-sans text-xs font-normal text-zinc-950">
-                {relocation.currentLocations.join(' / ')}
+                {relocation.nationality}
               </span>
             </div>
 

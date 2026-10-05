@@ -30,7 +30,7 @@ export function Experience() {
             Experience
           </h2>
           <p className="max-w-2xl font-sans text-base font-light leading-relaxed text-zinc-800 sm:text-lg">
-            Over a decade of crafting production-grade web systems across client consulting and software engineering teams.
+            Where I've worked and what I've built, from freelance client projects to engineering teams.
           </p>
         </div>
 
