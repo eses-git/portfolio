@@ -9,8 +9,8 @@ function Footer() {
 
   // Environment variables from Vite (.env)
   const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY || ''
-  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '48510374489'
-  const recipientEmail = import.meta.env.VITE_EMAIL || 'estera.bulkiewicz@gmail.com'
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER 
+  const recipientEmail = import.meta.env.VITE_EMAIL
 
   // Message form state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
