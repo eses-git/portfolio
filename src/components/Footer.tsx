@@ -7,13 +7,17 @@ function Footer() {
   const { header, relocation, github } = portfolioData
   const year = new Date().getFullYear()
 
+  // Environment variables from Vite (.env)
+  const web3FormsKey = import.meta.env.VITE_WEB3FORMS_KEY || ''
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '48510374489'
+  const recipientEmail = import.meta.env.VITE_EMAIL || 'estera.bulkiewicz@gmail.com'
+
   // Message form state
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
-  const whatsappNumber = '48510374489' 
   const defaultWhatsAppText = encodeURIComponent(
     'Hi Estera, I saw your portfolio and would like to discuss a potential project or opportunity.'
   )
@@ -31,8 +35,7 @@ function Footer() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          // Replace YOUR_WEB3FORMS_ACCESS_KEY with the key received in your Gmail
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY',
+          access_key: web3FormsKey,
           name: formData.name,
           email: formData.email,
           message: formData.message,
@@ -84,7 +87,7 @@ function Footer() {
               
               {submitted ? (
                 <div className="p-4 border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs font-normal">
-                  Thank you! Your message has been sent directly to estera.bulkiewicz@gmail.com.
+                  Thank you! Your message has been sent directly to {recipientEmail}.
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">

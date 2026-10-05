@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Check, Cloud, Cpu, ExternalLink, Layers, Pause, Play } from 'lucide-react'
 import GitHubIcon from './icons/GitHubIcon'
