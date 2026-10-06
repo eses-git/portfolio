@@ -25,7 +25,7 @@ function Footer() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // 1. Unfocus active input element to dismiss virtual keyboard & release iOS zoom state
+    // Unfocus active input element to dismiss virtual keyboard
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur()
     }
@@ -54,8 +54,7 @@ function Footer() {
       if (result.success) {
         setSubmitted(true)
         setFormData({ name: '', email: '', message: '' })
-
-        // 2. Trigger viewport repositioning after submitting message
+        // programmatically reset viewport scroll if iOS left it offset
         window.scrollTo({ top: window.scrollY, behavior: 'smooth' })
       } else {
         setErrorMessage('Something went wrong. Please try again or reach out on WhatsApp.')
@@ -66,6 +65,11 @@ function Footer() {
       setIsSubmitting(false)
     }
   }
+
+  // --- CHANGED CLASSNAMES ---
+  // We changed 'text-xs' to 'text-base sm:text-xs'
+  const inputClassName = "border border-zinc-200 bg-white px-3 py-2 font-sans text-base sm:text-xs text-zinc-900 focus:border-amber-600 focus:outline-none"
+  const textareaClassName = "border border-zinc-200 bg-white px-3 py-2 font-sans text-base sm:text-xs text-zinc-900 focus:border-amber-600 focus:outline-none"
 
   return (
     <footer id="footer" className="w-full border-t border-zinc-200 bg-white">
@@ -107,7 +111,7 @@ function Footer() {
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="border border-zinc-200 bg-white px-3 py-2 font-sans text-xs text-zinc-900 focus:border-amber-600 focus:outline-none"
+                      className={inputClassName}
                     />
                     <input
                       type="email"
@@ -115,7 +119,7 @@ function Footer() {
                       placeholder="Your Email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="border border-zinc-200 bg-white px-3 py-2 font-sans text-xs text-zinc-900 focus:border-amber-600 focus:outline-none"
+                      className={inputClassName}
                     />
                   </div>
                   <textarea
@@ -124,7 +128,7 @@ function Footer() {
                     placeholder="Your Message..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="border border-zinc-200 bg-white px-3 py-2 font-sans text-xs text-zinc-900 focus:border-amber-600 focus:outline-none"
+                    className={textareaClassName}
                   />
 
                   {errorMessage && (

@@ -33,8 +33,15 @@ export const AnimatedBackgroundWrapper: React.FC<AnimatedBackgroundWrapperProps>
     if (!ctx) return;
 
     // --- CONFIGURATION ---
-    const hexSize = 50; // Radius of the hexagons
-    const easingFactor = 0.04; // Controls animation speed (smaller is slower)
+    // Check if the screen is mobile (width < 768px)
+    const isMobile = window.innerWidth < 768;
+
+    // Radius of the hexagons. We make them slightly smaller on mobile.
+    const hexSize = isMobile ? 35 : 50; 
+
+    // Controls animation speed (smaller is slower). 
+    // This is the key fix for mobile speed.
+    const easingFactor = isMobile ? 0.015 : 0.04; 
     
     // --- DATA STRUCTURES ---
     let points: GridPoint[] = []; 
@@ -58,11 +65,14 @@ export const AnimatedBackgroundWrapper: React.FC<AnimatedBackgroundWrapperProps>
       mouse.y = null;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseout', handleMouseOut);
+    // We only add mouse listeners on non-mobile devices
+    if (!isMobile) {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseout', handleMouseOut);
+    }
 
     // Function to set canvas size and initialize grid with entrance animation offsets
-    const initialize = () => {
+    const initialize = (isFirstLoad: boolean) => {
       const parent = canvas.parentElement;
       if (parent) {
         canvas.width = parent.clientWidth;
@@ -96,10 +106,11 @@ export const AnimatedBackgroundWrapper: React.FC<AnimatedBackgroundWrapperProps>
             const key = `${Math.round(px)},${Math.round(py)}`;
 
             if (!pointMap.has(key)) {
-              // Calculate wide off-screen positions whenever isInitialized is false
-              const startX = !isInitialized.current
-                ? (px < canvas.width / 2 ? px - canvas.width : px + canvas.width)
-                : px;
+              // Calculate wide off-screen positions only on first load
+              let startX = px;
+              if (isFirstLoad) {
+                startX = px < canvas.width / 2 ? px - canvas.width : px + canvas.width;
+              }
 
               const newPoint: GridPoint = {
                 x: startX,
@@ -167,13 +178,12 @@ export const AnimatedBackgroundWrapper: React.FC<AnimatedBackgroundWrapperProps>
     // Kickstart the render loop
     animate();
 
-    // Intersection Observer: Trigger animation every time section enters view
+    // Intersection Observer: Trigger animation ONLY when the page first loads
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            isInitialized.current = false;
-            initialize();
+          if (entry.isIntersecting && !isInitialized.current) {
+            initialize(true); // Trigger full slide-in entrance
           }
         });
       },
@@ -183,15 +193,21 @@ export const AnimatedBackgroundWrapper: React.FC<AnimatedBackgroundWrapperProps>
     observer.observe(canvas);
 
     const handleResize = () => {
-      initialize();
+      // Re-initialize without the slide-in animation on resize
+      initialize(false); 
     };
     window.addEventListener('resize', handleResize);
 
     return () => {
       observer.disconnect();
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseout', handleMouseOut);
+      
+      // Cleanup mouse listeners only if they were added
+      if (!isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseout', handleMouseOut);
+      }
+
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
