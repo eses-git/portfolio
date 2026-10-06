@@ -184,7 +184,7 @@ function Footer() {
 
           </div>
 
-        
+        n
 
           {/* Bottom Bar */}
           <div className="flex flex-col gap-3 border-t border-zinc-200/80 pt-6 text-center font-sans text-xs font-light uppercase tracking-[0.25em] text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:text-left">
