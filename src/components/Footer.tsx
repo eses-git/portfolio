@@ -4,7 +4,7 @@ import { portfolioData } from '../data/portfolioData'
 import { AnimatedBackgroundWrapper } from './background/golden'
 
 function Footer() {
-  const { header, relocation, github } = portfolioData
+  const { header, github } = portfolioData
   const year = new Date().getFullYear()
 
   // Environment variables from Vite (.env)
