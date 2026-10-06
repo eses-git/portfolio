@@ -184,26 +184,7 @@ function Footer() {
 
           </div>
 
-          {/* Details Bar */}
-          <div className="grid gap-px border border-zinc-200 bg-zinc-200/80 backdrop-blur-sm md:grid-cols-2">
-            <div className="flex flex-col gap-1 bg-white/90 p-4 backdrop-blur-sm">
-              <span className="font-sans text-[10px] font-light uppercase tracking-[0.25em] text-zinc-500">
-                Nationality
-              </span>
-              <span className="font-sans text-xs font-normal text-zinc-950">
-                {relocation.nationality}
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-1 bg-white/90 p-4 backdrop-blur-sm">
-              <span className="font-sans text-[10px] font-light uppercase tracking-[0.25em] text-zinc-500">
-                Languages
-              </span>
-              <span className="font-sans text-xs font-light text-zinc-900">
-                {relocation.languages.join(' · ')}
-              </span>
-            </div>
-          </div>
+        
 
           {/* Bottom Bar */}
           <div className="flex flex-col gap-3 border-t border-zinc-200/80 pt-6 text-center font-sans text-xs font-light uppercase tracking-[0.25em] text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:text-left">

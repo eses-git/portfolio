@@ -71,7 +71,7 @@ function Hero() {
       {/* Scaled Status Badge */}
       <motion.span
         variants={itemVariants}
-        className="inline-block rounded-none border border-amber-300 bg-amber-100/80 px-4 py-2 font-sans text-xs font-light uppercase tracking-[0.25em] text-amber-800 backdrop-blur-sm md:text-sm mt-10"
+        className="inline-block text-center rounded-none border border-amber-300 bg-amber-100/80 px-4 py-2 font-sans text-xs font-light uppercase tracking-[0.25em] text-amber-800 backdrop-blur-sm md:text-sm mt-10"
       >
         [ {badge} ]
       </motion.span>
