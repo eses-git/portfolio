@@ -24,6 +24,12 @@ function Footer() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // 1. Unfocus active input element to dismiss virtual keyboard & release iOS zoom state
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
+
     setIsSubmitting(true)
     setErrorMessage('')
 
@@ -48,6 +54,9 @@ function Footer() {
       if (result.success) {
         setSubmitted(true)
         setFormData({ name: '', email: '', message: '' })
+
+        // 2. Trigger viewport repositioning after submitting message
+        window.scrollTo({ top: window.scrollY, behavior: 'smooth' })
       } else {
         setErrorMessage('Something went wrong. Please try again or reach out on WhatsApp.')
       }
