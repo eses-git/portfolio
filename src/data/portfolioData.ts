@@ -14,7 +14,7 @@
 export type PillarId = 'frontend-engineering' | 'solution-architecture'
 
 /** Accent tokens used to theme individual case studies in the UI. */
-export type CaseStudyAccent = 'amber' | 'bronze'
+export type CaseStudyAccent = 'amber' | 'bronze' | 'emerald'
 
 /** Top-of-page identity: who she is and what she does. */
 export interface PersonalHeader {
@@ -209,6 +209,42 @@ export const portfolioData: PortfolioData = {
   ],
 
   caseStudies: [
+    {
+      id: 'saas-analysis-suite',
+      name: 'Enterprise SaaS Analytics & Spreadsheet Extraction Suite',
+      subtitle: 'Version 1.0 — In Active Development',
+      role: 'Creator & Independent Full-Stack Engineer',
+      summary:
+        'A high-performance, fully client-side web application for uploading, parsing, analyzing, and visualizing SaaS and E-Commerce spreadsheet datasets — with zero server roundtrips. Every file is ingested entirely in browser memory, guaranteeing no transmission to third-party servers.',
+      architecture: [
+        'Asynchronous in-memory ingestion pipeline parsing .csv (PapaParse) and .xls/.xlsx (SheetJS) into a unified, strictly-typed ParsedDataset model',
+        'Automated schema & dynamic type inference classifying columns (number, date, boolean, string) by sampling up to 100 rows',
+        'Interactive Recharts analytics — dynamic Area/Trend, Bar, and Donut charts with persistent color palettes synchronized across fills, icons, and UI accents',
+        'Enterprise TanStack Table v8 DataGrid with debounced global search, numeric/date-aware sorting, pagination, and column-visibility toggles',
+        '100% client-side memory processing guaranteeing zero file transmission to third-party servers',
+      ],
+      highlights: [
+        'Zero-server-roundtrip processing — files never leave browser RAM and are never transmitted to any server',
+        'Smart type inference handling currency symbols ($/€/£/¥), thousands separators, ISO/MM/DD/YYYY date recognition, and camelCase header sanitization',
+        'Extraction & reporting views: schema inspection tables, raw row review, numeric quick-metrics, and print/PDF-optimized executive summaries with copy-to-clipboard support',
+        'Customizable persistent color palettes (Mint Emerald default, Cyber Indigo, Ocean Cyan, Sunset Amber) synchronized across chart fills, icons, and UI accents',
+      ],
+      stack: [
+        'React 19',
+        'TypeScript',
+        'Vite',
+        'Tailwind CSS v4',
+        'Zustand',
+        'TanStack Table v8',
+        'SheetJS (xlsx)',
+        'PapaParse',
+        'Recharts',
+        'Lucide Icons',
+      ],
+      githubUrl: 'https://github.com/eses-git/saas-analysis-suite',
+      liveUrl:'https://saas-analysis-suite.estera-bulkiewicz.workers.dev/',
+      accent: 'emerald',
+    },
     {
       id: 'xhiva-ltd',
       name: 'XHIVA Ltd',

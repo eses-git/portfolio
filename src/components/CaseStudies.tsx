@@ -43,6 +43,14 @@ const accentStyles: Record<
     chip: 'border-zinc-300 bg-stone-50 text-zinc-700 hover:border-amber-700',
     activeTab: 'border-amber-700 text-amber-700',
   },
+  emerald: {
+    badge: 'border-emerald-300 bg-emerald-100/80 text-emerald-800',
+    frame: 'hover:border-emerald-600',
+    text: 'text-emerald-600',
+    dot: 'bg-emerald-600',
+    chip: 'border-zinc-300 bg-stone-50 text-zinc-700 hover:border-emerald-600',
+    activeTab: 'border-emerald-600 text-emerald-600',
+  },
 }
 
 const INITIAL_TIME_SECONDS = 10
