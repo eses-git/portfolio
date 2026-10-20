@@ -12,6 +12,7 @@ const navItems: NavItem[] = [
   { label: 'Case Studies', href: '#case-studies' },
   { label: 'Tech Stack', href: '#capabilities' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#footer' },
 ]
 
@@ -167,7 +168,7 @@ export function Header() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-5 lg:gap-8 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}

@@ -1,4 +1,5 @@
 import CaseStudies from './components/CaseStudies'
+import Certifications from './components/Certifications'
 import Experience from './components/Experience'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
@@ -19,6 +20,7 @@ function App() {
       <CaseStudies />
       <TechMatrix />
       <Experience />
+      <Certifications />
       <Footer />
       </InteractiveWavesBackground>
 

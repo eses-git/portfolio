@@ -81,6 +81,23 @@ export interface CaseStudy {
   readonly accent: CaseStudyAccent
 }
 
+/** Accent tokens used to theme individual certifications in the UI. */
+export type CertificationAccent = 'amber' | 'emerald' | 'bronze'
+
+/** A professional certificate displayed in the Certifications carousel. */
+export interface Certification {
+  readonly id: string
+  readonly title: string
+  readonly issuer: string
+  /** Human-readable completion date, e.g. "October 20, 2026". */
+  readonly date: string
+  /** Public URL used to verify the certificate online. */
+  readonly verificationUrl: string
+  /** Path to the certificate preview image in `public/images/`. */
+  readonly image: string
+  readonly accent: CertificationAccent
+}
+
 /** A single role in the professional timeline. */
 export interface ExperienceEntry {
   readonly company: string
@@ -101,6 +118,7 @@ export interface PortfolioData {
   readonly pillars: readonly CorePillar[]
   readonly techMatrix: readonly TechCategory[]
   readonly caseStudies: readonly CaseStudy[]
+  readonly certifications: readonly Certification[]
   readonly experience: readonly ExperienceEntry[]
 }
 
@@ -317,6 +335,37 @@ export const portfolioData: PortfolioData = {
       ],
       liveUrl: 'https://vilcaseguros.com/',
       accent: 'amber',
+    },
+  ],
+
+  certifications: [
+    {
+      id: 'fcc-frontend-libraries',
+      title: 'Front-End Development Libraries',
+      issuer: 'freeCodeCamp',
+      date: 'October 20, 2026',
+      verificationUrl:
+        'https://www.freecodecamp.org/certification/fcc-319c6a86-734c-4034-a69e-7595d1438b8e/front-end-development-libraries-v9',
+      image: '/images/certifications/front-end-development-libraries.svg',
+      accent: 'emerald',
+    },
+    {
+      id: 'meta-advanced-react',
+      title: 'Advanced React',
+      issuer: 'Meta / Coursera',
+      date: 'December 4, 2023',
+      verificationUrl: 'https://coursera.org/verify/WCDW5GMKANZV',
+      image: '/images/certifications/advanced-react.svg',
+      accent: 'amber',
+    },
+    {
+      id: 'board-infinity-javascript-web',
+      title: 'JavaScript for Web Development',
+      issuer: 'Board Infinity / Coursera',
+      date: 'November 17, 2023',
+      verificationUrl: 'https://coursera.org/verify/CNKAAKYTJ86L',
+      image: '/images/certifications/javascript-web-development.svg',
+      accent: 'bronze',
     },
   ],
 
