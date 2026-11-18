@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { Check, Cloud, Cpu, ExternalLink, Layers, Pause, Play } from 'lucide-react'
+import { Check, Cloud, Cpu, ExternalLink, Layers, Lock, Pause, Play } from 'lucide-react'
 import GitHubIcon from './icons/GitHubIcon'
 import { portfolioData } from '../data/portfolioData'
 import type { CaseStudyAccent } from '../data/portfolioData'
@@ -219,6 +219,13 @@ function CaseStudies() {
                   <GitHubIcon className="h-4 w-4" />
                   View repository
                 </a>
+              ) : null}
+
+              {!project.githubUrl && project.repoNote ? (
+                <span className="inline-flex w-fit items-center gap-2 rounded-none border border-zinc-300 bg-stone-50/90 px-6 py-3 font-sans text-xs font-light uppercase tracking-wider text-zinc-500">
+                  <Lock className="h-4 w-4" aria-hidden="true" />
+                  {project.repoNote}
+                </span>
               ) : null}
             </div>
           </header>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { Award, ExternalLink, Pause, Play } from 'lucide-react'
+import { Award, ExternalLink, GraduationCap, Languages, Pause, Play } from 'lucide-react'
 import { portfolioData } from '../data/portfolioData'
 import type { CertificationAccent } from '../data/portfolioData'
 
@@ -40,16 +40,16 @@ function CertificatePreview({
   issuer,
   alt,
 }: {
-  readonly image: string
+  readonly image?: string
   readonly title: string
   readonly issuer: string
   readonly alt: string
 }) {
-  const [status, setStatus] = useState<ImageStatus>('loading')
+  const [status, setStatus] = useState<ImageStatus>(image ? 'loading' : 'error')
 
   return (
     <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-none border border-zinc-200 bg-white">
-      {status !== 'error' ? (
+      {status !== 'error' && image ? (
         <img
           src={image}
           alt={alt}
@@ -90,7 +90,7 @@ function CertificatePreview({
  * section, using the shared glassmorphic light-minimal design system.
  */
 function Certifications() {
-  const { certifications } = portfolioData
+  const { certifications, education, languages } = portfolioData
   const [activeCertId, setActiveCertId] = useState(certifications[0].id)
   const [isPaused, setIsPaused] = useState(false)
   const [timeLeft, setTimeLeft] = useState(INITIAL_TIME_SECONDS)
@@ -135,10 +135,11 @@ function Certifications() {
             Credentials
           </span>
           <h2 className="font-sans text-3xl font-extralight tracking-tight text-zinc-950 sm:text-4xl md:text-5xl">
-            Certifications
+            Certifications & Education
           </h2>
           <p className="max-w-2xl font-sans text-base font-light leading-relaxed text-zinc-800 sm:text-lg">
-            Verified professional certificates and credentials from freeCodeCamp, Meta, and Coursera.
+            Verified certificates, formal education, and language proficiency — from freeCodeCamp and Cisco
+            Networking Academy to technical schooling in Poland.
           </p>
         </div>
 
@@ -163,7 +164,7 @@ function Certifications() {
                       : 'border-zinc-300/80 bg-white/90 text-zinc-600 backdrop-blur-sm hover:border-amber-600 hover:text-amber-600'
                   }`}
                 >
-                  {entry.issuer}
+                  {entry.shortLabel ?? entry.issuer}
                 </button>
               )
             })}
@@ -216,20 +217,24 @@ function Certifications() {
               <h3 className="font-sans text-2xl font-light tracking-tight text-zinc-950 sm:text-3xl md:text-4xl">
                 {cert.title}
               </h3>
-              <p className={`font-sans text-xs font-light uppercase tracking-[0.25em] ${styles.text}`}>
-                Completed {cert.date}
-              </p>
+              {cert.date ? (
+                <p className={`font-sans text-xs font-light uppercase tracking-[0.25em] ${styles.text}`}>
+                  Completed {cert.date}
+                </p>
+              ) : null}
             </div>
 
-            <a
-              href={cert.verificationUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex w-fit items-center gap-2 rounded-none border border-amber-600 bg-white/90 px-6 py-3 font-sans text-xs font-medium uppercase tracking-wider text-amber-600 transition-all duration-300 hover:bg-amber-50 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Verify certificate
-            </a>
+            {cert.verificationUrl ? (
+              <a
+                href={cert.verificationUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-fit items-center gap-2 rounded-none border border-amber-600 bg-white/90 px-6 py-3 font-sans text-xs font-medium uppercase tracking-wider text-amber-600 transition-all duration-300 hover:bg-amber-50 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Verify certificate
+              </a>
+            ) : null}
           </header>
 
           <div className="grid md:grid-cols-5">
@@ -251,28 +256,106 @@ function Certifications() {
                 </h4>
                 <p className="font-sans text-base font-light text-zinc-900">{cert.issuer}</p>
               </div>
-              <div className="flex flex-col gap-2">
-                <h4 className="font-sans text-xs font-light uppercase tracking-[0.25em] text-zinc-700">
-                  Completed
-                </h4>
-                <p className="font-sans text-base font-light text-zinc-900">{cert.date}</p>
-              </div>
+              {cert.date ? (
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-sans text-xs font-light uppercase tracking-[0.25em] text-zinc-700">
+                    Completed
+                  </h4>
+                  <p className="font-sans text-base font-light text-zinc-900">{cert.date}</p>
+                </div>
+              ) : null}
               <div className="flex flex-col gap-2">
                 <h4 className="font-sans text-xs font-light uppercase tracking-[0.25em] text-zinc-700">
                   Verification
                 </h4>
-                <a
-                  href={cert.verificationUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`break-all font-sans text-sm font-light underline-offset-4 transition-colors hover:underline ${styles.text}`}
-                >
-                  {cert.verificationUrl}
-                </a>
+                {cert.verificationUrl ? (
+                  <a
+                    href={cert.verificationUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`break-all font-sans text-sm font-light underline-offset-4 transition-colors hover:underline ${styles.text}`}
+                  >
+                    {cert.verificationUrl}
+                  </a>
+                ) : (
+                  <p className="font-sans text-sm font-light text-zinc-600">
+                    Verification available directly from {cert.issuer}.
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </motion.article>
+
+        {/* Education & Languages */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* Formal education */}
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="flex flex-col gap-6 border border-zinc-200/80 bg-white/90 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-amber-600/50 hover:shadow-md"
+          >
+            <div className="flex items-center gap-4 border-b border-zinc-100 pb-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-amber-600/30 bg-amber-50/50 text-amber-700">
+                <GraduationCap className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-zinc-700">
+                Education
+              </h3>
+            </div>
+
+            <ul className="flex flex-col gap-6">
+              {education.map((entry) => (
+                <li
+                  key={`${entry.institution}-${entry.period}`}
+                  className="flex flex-col gap-1.5"
+                >
+                  <span className="font-sans text-lg font-light tracking-tight text-zinc-950">
+                    {entry.credential}
+                  </span>
+                  <span className="font-sans text-sm font-light leading-relaxed text-zinc-700">
+                    {entry.institution}
+                  </span>
+                  <span className="font-sans text-xs font-light uppercase tracking-[0.2em] text-zinc-500">
+                    {entry.location} · {entry.period}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.article>
+
+          {/* Language proficiency */}
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
+            className="flex flex-col gap-6 border border-zinc-200/80 bg-white/90 p-8 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-amber-600/50 hover:shadow-md"
+          >
+            <div className="flex items-center gap-4 border-b border-zinc-100 pb-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-amber-600/30 bg-amber-50/50 text-amber-700">
+                <Languages className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-zinc-700">
+                Languages
+              </h3>
+            </div>
+
+            <ul className="flex flex-wrap gap-2">
+              {languages.map((language) => (
+                <li
+                  key={language.name}
+                  className="flex items-center gap-2 border border-zinc-300/80 bg-stone-50/90 px-3 py-1 font-sans text-xs font-normal text-zinc-900 transition-colors hover:border-amber-600"
+                >
+                  <span>{language.name}</span>
+                  <span className="text-zinc-500">({language.level})</span>
+                </li>
+              ))}
+            </ul>
+          </motion.article>
+        </div>
       </div>
     </section>
   )

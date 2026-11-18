@@ -76,6 +76,8 @@ export interface CaseStudy {
   readonly stack: readonly string[]
   /** Optional source repository link. */
   readonly githubUrl?: string
+  /** Shown in place of a code link when the source repository is private. */
+  readonly repoNote?: string
   /** Optional deployed / live site link. */
   readonly liveUrl?: string
   readonly accent: CaseStudyAccent
@@ -89,13 +91,31 @@ export interface Certification {
   readonly id: string
   readonly title: string
   readonly issuer: string
+  /** Compact label for the selector chips; falls back to the issuer name. */
+  readonly shortLabel?: string
   /** Human-readable completion date, e.g. "October 20, 2026". */
-  readonly date: string
+  readonly date?: string
   /** Public URL used to verify the certificate online. */
-  readonly verificationUrl: string
+  readonly verificationUrl?: string
   /** Path to the certificate preview image in `public/images/`. */
-  readonly image: string
+  readonly image?: string
   readonly accent: CertificationAccent
+}
+
+/** Formal education entry displayed in the credentials section. */
+export interface EducationEntry {
+  readonly institution: string
+  /** Diploma / degree title awarded by the institution. */
+  readonly credential: string
+  readonly location: string
+  /** Free-form display range, e.g. "2007 — 2011". */
+  readonly period: string
+}
+
+/** Language proficiency displayed next to the education and certifications. */
+export interface LanguageSkill {
+  readonly name: string
+  readonly level: string
 }
 
 /** A single role in the professional timeline. */
@@ -119,6 +139,8 @@ export interface PortfolioData {
   readonly techMatrix: readonly TechCategory[]
   readonly caseStudies: readonly CaseStudy[]
   readonly certifications: readonly Certification[]
+  readonly education: readonly EducationEntry[]
+  readonly languages: readonly LanguageSkill[]
   readonly experience: readonly ExperienceEntry[]
 }
 
@@ -130,7 +152,7 @@ export const portfolioData: PortfolioData = {
     footerdesc:'Looking for Full-Stack Engineer and Solution Architect roles in Spain, remote or on-site. Available now.',
     headline: 'Full-stack development for the modern world.',
     summary:
-      'I design and ship production-grade frontend systems and the cloud architecture behind them — pairing deep React/TypeScript craft with AWS, CI/CD, and security-first delivery.',
+      'Full-Stack Software Engineer specializing in modern frontend architecture with React, Next.js, TypeScript and Tailwind CSS. Founder of an Ecuadorian software company and independent consultant who delivers end-to-end digital products for international and regional clients. Strong backend range across Node.js, PostgreSQL, Drizzle ORM, Python and PHP, with hands-on infrastructure and security experience in Cloudflare and serverless deployments. Fluent in English, Spanish and Polish.',
     roleBadges: ['Frontend Engineering', 'AWS & Solution Architecture'],
   },
 
@@ -205,6 +227,8 @@ export const portfolioData: PortfolioData = {
         'CloudFront & Route53',
         'PHP',
         'Python (FastAPI)',
+        'Node.js',
+        'PostgreSQL & Drizzle ORM',
         'MySQL, MariaDB, noSQL',
         'Stripe & PayPal integrations',
       ],
@@ -218,6 +242,7 @@ export const portfolioData: PortfolioData = {
       items: [
         'GitHub Actions & Vercel CI/CD',
         'Cloudflare DNS & DDoS Protection',
+        'Cloudflare Workers & Serverless',
         'Linux (Ubuntu / Apache / Nginx)',
         'Bash Scripting & Automation',
         'SSL / TLS Setup',
@@ -261,6 +286,38 @@ export const portfolioData: PortfolioData = {
       ],
       githubUrl: 'https://github.com/eses-git/saas-analysis-suite',
       liveUrl:'https://saas-analysis-suite.estera-bulkiewicz.workers.dev/',
+      accent: 'emerald',
+    },
+    {
+      id: 'digital-vender-ecuador',
+      name: 'Digital Vender Ecuador',
+      subtitle: 'Full-Stack digital asset marketplace & service platform',
+      role: 'Founder & Full-Stack Engineer',
+      summary:
+        'Full-Stack digital asset marketplace and service platform featuring secure regional payment gateways, cloud storage vaulting, and optimized serverless edge routing.',
+      architecture: [
+        'Next.js 15 App Router frontend built with TypeScript and Tailwind CSS',
+        'PostgreSQL data layer modelled and queried through Drizzle ORM',
+        'Secure regional payment gateway integrations for local and international checkout',
+        'Cloud storage vaulting protecting stored digital assets and their delivery',
+        'Optimized serverless edge routing deployed on Cloudflare',
+      ],
+      highlights: [
+        'Designed, built, and now operates the full marketplace and service platform as founder and lead engineer',
+        'Regional payment gateways enabling secure local and international transactions',
+        'Cloud storage vaulting keeping purchased digital assets protected and reliably deliverable',
+        'Serverless edge routing tuned for fast, resilient delivery across regions',
+      ],
+      stack: [
+        'Next.js 15',
+        'TypeScript',
+        'Tailwind CSS',
+        'PostgreSQL',
+        'Drizzle ORM',
+        'Cloudflare',
+      ],
+      liveUrl: 'https://digitalvenderecuador.com',
+      repoNote: 'Source repository is private',
       accent: 'emerald',
     },
     {
@@ -341,18 +398,42 @@ export const portfolioData: PortfolioData = {
   certifications: [
     {
       id: 'fcc-frontend-libraries',
-      title: 'Front-End Development Libraries',
+      title: 'Frontend Development Libraries & Advanced React/JavaScript',
       issuer: 'freeCodeCamp',
-      date: 'October 20, 2026',
+      shortLabel: 'Frontend & React',
+      date: 'October 2026',
       verificationUrl:
         'https://www.freecodecamp.org/certification/fcc-319c6a86-734c-4034-a69e-7595d1438b8e/front-end-development-libraries-v9',
       image: '/images/certifications/front-end-development-libraries.svg',
       accent: 'emerald',
     },
     {
+      id: 'cisco-intro-cybersecurity',
+      title: 'Introduction to Cybersecurity',
+      issuer: 'Cisco Networking Academy',
+      shortLabel: 'Cybersecurity',
+      date: 'November 2026',
+      accent: 'amber',
+      image: '/images/certifications/cisco.png',
+      verificationUrl:
+        'https://www.credly.com/badges/e16f8820-102a-4150-96b3-e224c0a5c681/public_url',
+    },
+    {
+      id: 'fcc-english-b1',
+      title: 'B1 English for Developers',
+      issuer: 'freeCodeCamp',
+      shortLabel: 'B1 English',
+      date: 'November 2026',
+      accent: 'bronze',
+      image: '/images/certifications/englishcert.png',
+      verificationUrl:
+        'https://www.freecodecamp.org/certification/fcc-319c6a86-734c-4034-a69e-7595d1438b8e/b1-english-for-developers',
+    },
+    {
       id: 'meta-advanced-react',
       title: 'Advanced React',
       issuer: 'Meta / Coursera',
+      shortLabel: 'Advanced React',
       date: 'December 4, 2023',
       verificationUrl: 'https://coursera.org/verify/WCDW5GMKANZV',
       image: '/images/certifications/advanced-react.svg',
@@ -362,6 +443,7 @@ export const portfolioData: PortfolioData = {
       id: 'board-infinity-javascript-web',
       title: 'JavaScript for Web Development',
       issuer: 'Board Infinity / Coursera',
+      shortLabel: 'JavaScript',
       date: 'November 17, 2023',
       verificationUrl: 'https://coursera.org/verify/CNKAAKYTJ86L',
       image: '/images/certifications/javascript-web-development.svg',
@@ -369,23 +451,35 @@ export const portfolioData: PortfolioData = {
     },
   ],
 
+  education: [
+    {
+      institution: 'Technical School No. 2 im. Marii Skłodowskiej-Curie',
+      credential: 'IT Specialist Diploma / Technician Title',
+      location: 'Poland',
+      period: '2007 — 2011',
+    },
+  ],
+
+  languages: [
+    { name: 'English', level: 'Fluent' },
+    { name: 'Spanish', level: 'Fluent' },
+    { name: 'Polish', level: 'Native' },
+  ],
+
   experience: [
     {
       company: 'Independent Consulting',
-      role: 'Full-Stack Software Engineer',
+      role: 'Independent Software Consultant & Agency Founder',
       period: 'Oct 2019 — Present',
       location: 'Ecuador & International Remote',
       summary:
-        'I work independently with international clients, covering everything from the Figma hand-off to the frontend, backend, payments, and hosting.',
+        'Technical lead, full-stack engineer, and founder of an Ecuadorian software company — scoping, architecting, and delivering end-to-end digital products for international clients and regional businesses.',
       highlights: [
-        "Built custom HTML5 Canvas animation engines in React and TypeScript that run at 60 FPS without touching the DOM, so heavy visual backgrounds don't slow pages down.",
-        'Developed REST APIs and backend services in PHP (Yii2) and Python, connected to MySQL and used by modern frontends.',
-        'Integrated Stripe and PayPal payment gateway APIs with backend service layers.',
-        'Set up CI/CD pipelines on Vercel, Cloudflare workers and secured client sites with Cloudflare (DDoS protection, SSL, DNS).',
-        'Utilized advanced AI tooling (Claude, Gemini, ChatGPT, Cline Agent) to accelerate system design, unit test generation, and code refactoring.',
-        'Delivered WordPress and Wix sites, fixed performance problems on existing ones, and migrated domains and servers.',
-        'Diagnosed and resolved performance and technical issues across existing websites, executing seamless domain and server migrations',
-        'Lead projects from the first call to launch: gather requirements, propose solutions, and keep clients updated in English and Spanish.'
+        'Consult as a technical lead and full-stack engineer for international clients and regional businesses, managing full project lifecycles from initial architecture scoping to production deployment.',
+        'Architect and deliver high-performance custom web applications, e-commerce platforms, and scalable presentation sites using React, Next.js, TypeScript, and Tailwind CSS.',
+        'Engineer secure backend services, robust database connections, and third-party API integrations (Stripe, PayPal, Payphone, Deuna) using Node.js, Python, and PHP (Yii2).',
+        'Implement enterprise-grade security, WAF rules, DDoS mitigation, and edge performance optimization via Cloudflare configurations.',
+        'Establish automated CI/CD deployment pipelines on Vercel and manage Linux/Apache2 production server environments.',
       ],
     },
     {

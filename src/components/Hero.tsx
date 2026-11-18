@@ -92,6 +92,19 @@ function Hero() {
         </p>
       </motion.div>
 
+      {/* Professional Summary */}
+      <motion.div
+        variants={itemVariants}
+        className="mx-auto mt-10 w-full max-w-3xl border-t border-zinc-200/80 pt-8 text-center"
+      >
+        <span className="font-sans text-xs font-light uppercase tracking-[0.25em] text-amber-600">
+          Professional Summary
+        </span>
+        <p className="mt-4 text-pretty font-sans text-base font-light leading-relaxed text-zinc-800 sm:text-lg">
+          {header.summary}
+        </p>
+      </motion.div>
+
       {/* Glassmorphic Metadata & Photo Card */}
       <motion.div
         variants={itemVariants}

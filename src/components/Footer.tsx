@@ -59,7 +59,7 @@ function Footer() {
       } else {
         setErrorMessage('Something went wrong. Please try again or reach out on WhatsApp.')
       }
-    } catch (err) {
+    } catch {
       setErrorMessage('Network error. Please try again later.')
     } finally {
       setIsSubmitting(false)
